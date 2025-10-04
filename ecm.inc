@@ -1,3 +1,8 @@
+#if defined _inc_extended_client_message
+    #endinput
+#endif
+#define _inc_extended_client_message
+
 #tryinclude <Pawn.RakNet>
 #if !defined PAWNRAKNET_INC_
     #error "Pawn.RakNet not found (it is necessary to use extended client message!)"
