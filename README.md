@@ -2,7 +2,7 @@
 A simple Pawn.RakNet handler to catch unexpected (or expected) SendClientMessage packets that are more than 144 characters.
 
 ### Requirements
-[Pawn.RakNet v 1.6.0-omp](https://github.com/katursis/Pawn.RakNet/releases/tag/1.6.0-omp)
+[Pawn.RakNet v 1.6.0-omp](https://github.com/katursis/Pawn.RakNet/releases/tag/1.6.0-omp)  
 [PawnPlus v 1.5.1](https://github.com/IS4Code/PawnPlus/releases/tag/v1.5.1)
 
 ## Instalation
