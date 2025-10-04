@@ -15,6 +15,7 @@ Just drop `ecm.inc` into your includes folder, then make sure to include it on y
 There isn't an action expected for you. This handler will intercept the SendClientMessage RPC, then check its length.  
 If it doesn't exceed the SA:MP character limit (144 characters), it will continue with the common behavior.  
 If not, it will be digested by a PawnPlus string, splitted into many lines and sent in batches to the client.  
+
 This handler also supports color embedding in your string (so it will not do some weird cutoffs in your text color setup).
 
 ### To-do:
