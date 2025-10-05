@@ -7,7 +7,7 @@ A simple Pawn.RakNet handler to catch unexpected (or expected) SendClientMessage
 
 ## Instalation
 
-Just drop `ecm.inc` into your includes folder, then make sure to include it on your script AFTER including Pawn.RakNet.
+Just drop `ecm.inc` into your includes folder, Make sure to `#include` it on your script AFTER including both required plugins.
 
 
 ## Usage
