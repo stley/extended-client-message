@@ -29,7 +29,6 @@ ORPC:rpcSendClientMessage(playerid, BitStream:bs){
 		BS_ReadUint8(bs, bitty);
 		str_append_format(message_s, "%c", bitty);
 	}
-	print_s(message_s);
 	new String:substr;
 	new buffer[145];
 	while(str_len(message_s) > 144){
@@ -39,7 +38,6 @@ ORPC:rpcSendClientMessage(playerid, BitStream:bs){
 		if(color_embed != -1)
 			embed = str_sub(message_s, color_embed, color_close+1);
 		substr = str_sub(message_s, 0, ((color_embed) == -1 || color_embed == 0) ? 143 : color_embed);
-		print_s(substr);
 		str_del(message_s, 0, ((color_embed) == -1 || color_embed == 0) ? 143 : color_embed);
 		if(color_embed != -1)
 			str_ins(message_s, embed, 0);
