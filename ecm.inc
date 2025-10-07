@@ -12,6 +12,16 @@
     #error "PawnPlus not found (it is necessary to use extended client message!)"
 #endif
 
+BS_ReadString_s(BitStream:bs, String:output, offset, length){
+	new bitty;
+	for(new char_pos; char_pos < length; char_pos++){
+		BS_SetReadOffset(bs, offset+(char_pos*8));
+		BS_ReadUint8(bs, bitty);
+		str_append_format(output, "%c", bitty);
+	}
+	return 1;
+}
+
 static const rpcSendClientMessage = 93; //SendClientMessage - ID: 93 | Parameters: UINT32 dColor, UINT32 dMessageLength, char[] Message
 
 ORPC:rpcSendClientMessage(playerid, BitStream:bs){
@@ -23,12 +33,14 @@ ORPC:rpcSendClientMessage(playerid, BitStream:bs){
 	PR_UINT32, length);
 	if (length <= 144) return 1;
 	new String:message_s = str_new("");
-	new bitty;
+	BS_ReadString_s(bs, message_s, 64, length);
+	print_s(message_s);
+	/*new bitty;
 	for(new l; l < length; l++){
 		BS_SetReadOffset(bs, 64+(l*8));
 		BS_ReadUint8(bs, bitty);
 		str_append_format(message_s, "%c", bitty);
-	}
+	}*/
 	new String:substr;
 	new buffer[145];
 	while(str_len(message_s) > 144){
