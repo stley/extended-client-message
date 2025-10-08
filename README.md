@@ -18,9 +18,17 @@ If not, it will be digested by a PawnPlus string, splitted into many lines and s
 
 This handler also supports color embedding in your string (so it will not do some weird cutoffs in your text color setup).
 
+### Internal functions (that can be useful for extraordinary purposes)
+
+`ecm_ReadString` is a wrapper for `BS_ReadString`, taking a PawnPlus `String:` as a valid output. It is used internally by this handler but can be useful in other cases.
+```c
+ecm_ReadString(BitStream:bs, String:output, offset, length)
+```
+
 ## Important
 
-Due to this include using some iterations and byte-per-byte reading (in order to read strings from packets into a PawnPlus string), this script could be a little slow.  
+Due to this include using some iterations and byte-per-byte reading (in order to read strings from packets into a PawnPlus string), it can be a little slow.  
+However, a server with no load can handle reading an batch of 1000 BitStream packet string with 1300-ish characters, split and send them them right over in something about 400-500 miliseconds.  
 It is recommended to exploit its capacities on special cases.
 
 ## To-do:
