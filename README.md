@@ -28,7 +28,7 @@ ecm_ReadString(BitStream:bs, String:output, offset, length)
 ## Important
 
 Due to this include using some iterations and byte-per-byte reading (in order to read strings from packets into a PawnPlus string), it can be a little slow.  
-However, a server with no load can handle reading an batch of 1000 BitStream packet string with 1300-ish characters, split and send them them right over in something about 400-500 miliseconds.  
+However, a server with no load can handle reading 1000 BitStream packet string with 1300-ish characters, split and send them them right over in something about 400-500 miliseconds.  
 It is recommended to exploit its capacities on special cases.
 
 ## To-do:
