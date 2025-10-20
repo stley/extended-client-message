@@ -22,6 +22,13 @@ stock ecm_ReadString(BitStream:bs, String:output, offset, length){
 }
 static const rpcSendClientMessage = 93; //SendClientMessage - ID: 93 | Parameters: UINT32 dColor, UINT32 dMessageLength, char[] Message
 
+stock str_rfindc(ConstStringTag:string, value){
+	for(new i = str_len(string)-1; i >= 0; i--){
+		if(str_getc(string, i) == value) return i;
+	}
+	return -1;
+}
+
 ORPC:rpcSendClientMessage(playerid, BitStream:bs){
 	
 	new length;
@@ -35,15 +42,26 @@ ORPC:rpcSendClientMessage(playerid, BitStream:bs){
 	new String:substr;
 	new buffer[145];
 	while(str_len(message_s) > 144){
-		new color_embed = str_findc(message_s, '{');
-		new color_close = str_findc(message_s, '}');
+		substr = str_sub(message_s, 0, 144);
+		str_del(message_s, 0, 144);
+		if(str_len(message_s) > 144){
+			if(str_len(substr) >= 144 && str_getc(substr, 143) != ' ' && str_getc(message_s, 0) != ' '){
+				new spit_pos = str_rfindc(substr, ' ');
+				if(spit_pos != -1 && spit_pos < str_len(substr)){
+					str_ins(message_s, str_sub(substr, spit_pos+1, str_len(substr)), 0);
+					str_del(substr, spit_pos+1);
+				}
+			}
+		}
+		new color_embed = str_rfindc(substr, '{');
+		new color_close = str_rfindc(substr, '}');
 		new String:embed;
-		if(color_embed != -1)
-			embed = str_sub(message_s, color_embed, color_close+1);
-		substr = str_sub(message_s, 0, ((color_embed) == -1 || color_embed == 0) ? 143 : color_embed);
-		str_del(message_s, 0, ((color_embed) == -1 || color_embed == 0) ? 143 : color_embed);
-		if(color_embed != -1)
+		if(color_embed != -1 && color_close != -1)
+			embed = str_sub(substr, color_embed, color_close+1);
+		if(str_valid(embed) && str_len(embed) == 8){
 			str_ins(message_s, embed, 0);
+			str_delete(embed);
+		}
 		str_get(substr, buffer);
 		SendClientMessage(playerid, color, buffer);
 		str_delete(substr);
