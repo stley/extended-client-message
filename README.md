@@ -31,7 +31,3 @@ Due to this include using some iterations and byte-per-byte reading (in order to
 However, a server with no load can handle reading 1000 BitStream packet string with 1300-ish characters, split and send them them right over in something about 400-500 miliseconds.  
 It is recommended to exploit its capacities on special cases.
 
-## To-do:
-
-Esthetics:
-- Check for spaces in the output text, then split the message taking in consideration the farest in-range space character.
